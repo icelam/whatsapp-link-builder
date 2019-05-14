@@ -1,5 +1,5 @@
 import axios from 'axios';
 
-const detectCountry = () => axios.get(`http://ip-api.com/json/?fields=status,message,country`);
+const detectCountry = () => axios.get(`https://ipapi.co/json`);
 
 export default { detectCountry };

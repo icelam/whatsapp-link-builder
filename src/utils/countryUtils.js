@@ -14,7 +14,11 @@ const getCountryName = (countryCode) => {
 
 // Search for country by keywords
 const getCountryNameByString = (countryKeyword) => {
-  return countryList.filter(c => new RegExp(countryKeyword).test(c.name));
+  if(countryKeyword) {
+    return countryList.filter(c => new RegExp(countryKeyword).test(c.name));
+  } else {
+    return [];
+  }
 };
 
 // Return all countries

@@ -29,12 +29,10 @@ export const useCountryState = () => {
       const defaultCountryCode = '1';
 
       services.detectCountry().then(({ data })=> {
-        if (data.status === 'success') {
-          const possibleMatch = countryUtils.getCountryNameByString(data.country);
+        const possibleMatch = countryUtils.getCountryNameByString(data.country_name);
 
-          if (possibleMatch.length > 0) {
-            updateCountryInfo(possibleMatch[0].name, possibleMatch[0].code);
-          }
+        if (possibleMatch.length > 0) {
+          updateCountryInfo(possibleMatch[0].name, possibleMatch[0].code);
         } else {
           updateCountryInfo(countryUtils.getCountryName(defaultCountryCode), defaultCountryCode);
         }
