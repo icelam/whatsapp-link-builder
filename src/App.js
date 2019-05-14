@@ -24,13 +24,24 @@ const LinkBuilder = lazy(() => import(/* webpackChunkName: 'LinkBuilder' */ '@pa
 const LinkResult = lazy(() => import(/* webpackChunkName: 'LinkResult' */ '@pages/LinkResult'));
 const NotFound = lazy(() => import(/* webpackChunkName: 'NotFound' */ '@pages/NotFound'));
 
+const history = createBrowserHistory();
+
+// Execute when user navigates between routes
+const onRouteChange = (history) => {
+  history.listen((location) => {
+    window.scrollTo(0, 0);
+  });
+};
+
+onRouteChange(history);
+
 const App = () => (
   <div id="app">
     <StateProvider initialState={initialState} reducer={reducer}>
       <ThemeProvider theme={themes.light}>
         <Fragment>
           <GlobalStyle />
-          <Router history={createBrowserHistory()}>
+          <Router history={history}>
             <Suspense fallback={<Loading />}>
               <Switch>
                 <Route exact path={routes.home} component={LinkBuilder} />

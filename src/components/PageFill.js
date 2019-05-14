@@ -11,7 +11,7 @@ import Header from '@components/Header';
 const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
 `;
 
 const ContentContainer = styled(Container)`

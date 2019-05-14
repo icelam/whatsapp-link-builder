@@ -11,7 +11,7 @@ const spinning = keyframes`
 `;
 
 const LoadingWrapper = styled.div`
-  min-height: 100vh;
+  height: 100%;
   padding: 10%;
   box-sizing: border-box;
   display: flex;

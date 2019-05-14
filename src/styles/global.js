@@ -52,6 +52,10 @@ const GlobalStyle = createGlobalStyle`
       color: ${props => props.theme.linkHoverColor};
     }
   }
+
+  #root, #app {
+    height: 100%;
+  }
 `;
 
 export default GlobalStyle;
