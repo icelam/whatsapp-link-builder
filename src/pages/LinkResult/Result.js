@@ -74,7 +74,7 @@ const Result = () => {
       <p>Here is the WhatsApp link generated based on your input:</p>
       <PreviewTextarea readOnly={true} ref={generatedLink} value={finalUrl} />
       <Button type="button" ref={copyButton}>Copy Link</Button>
-      <SuccessMessage show={showCopiedMessage} mountOnEnter={false} unmountOnExit={false} >Link copied!</SuccessMessage>
+      <SuccessMessage show={showCopiedMessage} mountOnEnter={false} unmountOnExit={false}>Link copied!</SuccessMessage>
     </ResultContent>
   );
 }

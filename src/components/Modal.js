@@ -69,6 +69,16 @@ const ModalContent = styled.div`
   flex-shrink: 1;
   flex-basis: auto;
   -webkit-overflow-scrolling: touch;
+
+  & > p {
+    padding: 0 20px;
+    margin 0;
+    font-size: 0.75em;
+  }
+
+  p + p {
+    margin-top: 1em;
+  }
 `;
 
 const Modal = ({ title, closeFunc, children, show }) => (

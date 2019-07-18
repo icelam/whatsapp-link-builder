@@ -49,7 +49,6 @@ const PhoneGroup = styled.div`
 `;
 
 const DailCodeInputGroup = styled(InputGroup)`
-  position: relative;
   width: 30%;
   margin-right: 3%;
   float: left;
@@ -162,7 +161,7 @@ const BuilderForm = withRouter(({ history }) => {
 
       <InputGroup>
         <Label htmlFor="message">Message</Label>
-        <Textarea label="Message"
+        <Textarea
           placeholder="Type your message here"
           id="message"
           value={message}

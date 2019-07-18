@@ -7,7 +7,7 @@ import Input from '@components/Input';
 const InputSymbol = styled.div`
   &:after {
     content: '${props => props.symbol}';
-    top: 40px;
+    bottom: 10px;
     left: 14px;
     position: absolute;
   }
