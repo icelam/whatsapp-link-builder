@@ -26,7 +26,7 @@ storiesOf('Inputs', module)
     <Input
       placeholder="Type something here!"
       id="inputID"
-      value="Default text"
+      defaultValue="Default text"
       onChange={action('typed')}
     />
   )
@@ -45,7 +45,7 @@ storiesOf('Inputs', module)
         symbol="+"
         placeholder="Type your country code"
         id="inputID"
-        value="852"
+        defaultValue="852"
         onChange={action('typed')}
       />
     </InputGroup>
@@ -61,12 +61,12 @@ storiesOf('Inputs', module)
     <Textarea
       placeholder="Type your message here"
       id="textareaID"
-      value="Default text"
+      defaultValue="Default text"
       onChange={action('typed')}
     />
   )
   .add('Select', () =>
-    <Select value="item2" value="item2" onChange={action('changed')}>
+    <Select value="item2" defaultValue="item2" onChange={action('changed')}>
       <option value="item1">Item 1</option>
       <option value="item2">Item 2</option>
     </Select>
@@ -87,7 +87,7 @@ storiesOf('Inputs', module)
         symbol="+"
         placeholder="Type your country code"
         id="inputID"
-        value="852"
+        defaultValue="852"
         onChange={action('typed')}
       />
     </InputGroup>
@@ -104,9 +104,9 @@ storiesOf('Inputs', module)
   .add('Input Groups - Select', () =>
     <InputGroup>
       <Label htmlFor="labelName">Label Text</Label>
-      <Select value="item2" onChange={action('changed')}>
+      <Select defaultValue="item2" onChange={action('changed')}>
         <option value="item1">Item 1</option>
-        <option value="item2" selected>Item 2</option>
+        <option value="item2">Item 2</option>
       </Select>
     </InputGroup>
   )
