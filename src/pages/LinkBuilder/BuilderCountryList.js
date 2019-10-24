@@ -1,5 +1,5 @@
 /* Dependencies */
-import React from 'react';
+import React, { useMemo } from 'react';
 
 /* Components */
 import Modal from '@components/Modal';
@@ -16,18 +16,18 @@ import * as actions from '@states/actions';
 const BuilderCountryList = () => {
   const [{ showCountryList }, dispatch] = useStateContext();
 
-  // Dispatch actions
-  const closeModal = () => {
-    dispatch(actions.closeModal());
-  };
+  const model = useMemo(() => {
+    // Dispatch actions
+    const closeModal = () => {
+      dispatch(actions.closeModal());
+    };
+    const listItemSelectHandler = (countryName, countryCode) => {
+      dispatch(actions.updateCountryInfo(countryName, countryCode));
+      closeModal();
+    };
 
-  const listItemSelectHandler = (countryName, countryCode) => {
-    dispatch(actions.updateCountryInfo(countryName, countryCode));
-    closeModal();
-  };
-
-  return (
-    <Modal title="Country" closeFunc={closeModal} show={showCountryList}>
+    return (
+      <Modal title="Country" closeFunc={closeModal} show={showCountryList}>
       {
         countryUtils.getCountryList().map((c, i) => (
           <ListItem key={i} onClick={ () => { listItemSelectHandler(c.name, c.code) } }>
@@ -37,7 +37,11 @@ const BuilderCountryList = () => {
         ))
       }
     </Modal>
-  )
+    )
+  }, [dispatch, showCountryList])
+
+
+  return model
 };
 
 export default BuilderCountryList;
