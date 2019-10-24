@@ -1,5 +1,5 @@
 /* Dependencies */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
@@ -78,23 +78,6 @@ const BuilderForm = withRouter(({ history }) => {
 
   const [{ countryName, countryCode, phoneNumber, message }, dispatch] = useStateContext();
 
-  // Dispatch actions
-  const updateCountryInfo = (countryName, countryCode) => {
-    dispatch(actions.updateCountryInfo(countryName, countryCode));
-  };
-
-  const updatePhoneNumber = (phoneNumber) => {
-    dispatch(actions.updatePhoneNumber(phoneNumber));
-  };
-
-  const updateMessage = (message) => {
-    dispatch(actions.updateMessage(message));
-  };
-
-  const openModal = () => {
-    dispatch(actions.openModal());
-  };
-
   // Custom Hook - Subscribe to auto counrty detection
   useCountryState();
 
@@ -120,45 +103,63 @@ const BuilderForm = withRouter(({ history }) => {
       history.push(routes.result);
     }
   };
+  const inputGroup = useMemo(() =>{
+    const openModal = () => {
+      dispatch(actions.openModal());
+    };
+    return (<InputGroup>
+      <Label htmlFor="countryName">Country</Label>
+      <Input
+        placeholder="Select your country"
+        id="countryName"
+        readOnly={true}
+        value={countryName}
+        onClick={openModal}
+      />
+    </InputGroup>);
+  }, [countryName, dispatch]);
 
-  return (
-    <LinkBuilderFrom onSubmit={e => submitHandler(e)}>
-      <InputGroup>
-        <Label htmlFor="countryName">Country</Label>
+  const dailCodeInputGroup = useMemo(() => {
+    // Dispatch actions
+    const updateCountryInfo = (countryName, countryCode) => {
+      dispatch(actions.updateCountryInfo(countryName, countryCode));
+    };
+    return (<DailCodeInputGroup>
+      <Label htmlFor="countryCode">Code</Label>
+      <InputWithSymbol
+        symbol="+"
+        placeholder="Type your country code here"
+        id="countryCode"
+        value={countryCode}
+        onChange={e => { updateCountryInfo(countryUtils.getCountryName(e.target.value), e.target.value) }}
+      />
+      <ErrorMessage show={errorState.countryCode}>Invalid country code</ErrorMessage>
+    </DailCodeInputGroup>);
+  }, [countryCode, dispatch, errorState.countryCode]);
+
+  const phoneNumberInputGroup = useMemo(() => {
+    const updatePhoneNumber = (phoneNumber) => {
+      dispatch(actions.updatePhoneNumber(phoneNumber));
+    };  
+    return (
+      <PhoneNumberInputGroup>
+        <Label htmlFor="phoneNumber">Mobile number</Label>
         <Input
-          placeholder="Select your country"
-          id="countryName"
-          readOnly={true}
-          value={countryName}
-          onClick={openModal}
+          placeholder="Type the mobile number you are sending to"
+          id="phoneNumber"
+          value={phoneNumber}
+          onChange={e => { updatePhoneNumber(e.target.value) }}
         />
-      </InputGroup>
+        <ErrorMessage show={errorState.phoneNumber}>Invalid mobile number</ErrorMessage>
+      </PhoneNumberInputGroup>
+    );
+  }, [dispatch, errorState.phoneNumber, phoneNumber]);
 
-      <PhoneGroup>
-        <DailCodeInputGroup>
-          <Label htmlFor="countryCode">Code</Label>
-          <InputWithSymbol
-            symbol="+"
-            placeholder="Type your country code here"
-            id="countryCode"
-            value={countryCode}
-            onChange={e => { updateCountryInfo(countryUtils.getCountryName(e.target.value), e.target.value) }}
-          />
-          <ErrorMessage show={errorState.countryCode}>Invalid country code</ErrorMessage>
-        </DailCodeInputGroup>
-
-        <PhoneNumberInputGroup>
-          <Label htmlFor="phoneNumber">Mobile number</Label>
-          <Input
-            placeholder="Type the mobile number you are sending to"
-            id="phoneNumber"
-            value={phoneNumber}
-            onChange={e => { updatePhoneNumber(e.target.value) }}
-          />
-          <ErrorMessage show={errorState.phoneNumber}>Invalid mobile number</ErrorMessage>
-        </PhoneNumberInputGroup>
-      </PhoneGroup>
-
+  const msgBox = useMemo(()=> {
+    const updateMessage = (message) => {
+      dispatch(actions.updateMessage(message));
+    };
+    return (
       <InputGroup>
         <Label htmlFor="message">Message</Label>
         <Textarea
@@ -168,10 +169,25 @@ const BuilderForm = withRouter(({ history }) => {
           onChange={e => { updateMessage(e.target.value) }}
         />
       </InputGroup>
+    );
+  }, [dispatch, message])
 
+  const buttonBox = useMemo(()=> {
+    return (
       <CenterContent>
         <Button type="submit" disabled={!allowSubmit}>Generate</Button>
       </CenterContent>
+    )
+  }, [allowSubmit]);
+  return (
+    <LinkBuilderFrom onSubmit={submitHandler}>
+      {inputGroup}
+      <PhoneGroup>
+        {dailCodeInputGroup}
+        {phoneNumberInputGroup}
+      </PhoneGroup>
+      {msgBox}
+      {buttonBox}
     </LinkBuilderFrom>
   )
 });
