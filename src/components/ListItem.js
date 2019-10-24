@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 
-const ListItem = styled.div`
+const ListItem = memo(styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -15,6 +16,6 @@ const ListItem = styled.div`
   span:last-of-type {
     color: ${props => props.theme.labelTextColor}
   }
-`;
+`);
 
 export default ListItem;

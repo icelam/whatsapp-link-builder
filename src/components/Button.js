@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 
-const Button = styled.button`
+const Button = memo(styled.button`
   display: inline-block;
   border: none;
   border-radius: 4px;
@@ -29,6 +30,6 @@ const Button = styled.button`
       background-color: ${props => props.theme.buttonDisabledHoverBackgroundColor};
     }
   }
-`;
+`);
 
 export default Button;

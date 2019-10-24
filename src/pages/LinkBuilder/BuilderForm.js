@@ -1,7 +1,7 @@
 /* Dependencies */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import history from '@utils/history';
 
 /* Components */
 import InputGroup from '@components/InputGroup';
@@ -73,7 +73,7 @@ const CenterContent = styled.div`
 `;
 
 /* Form */
-const BuilderForm = withRouter(({ history }) => {
+const BuilderForm = () => {
   const [errorState, setErrorState] = useState({ countryCode: false, phoneNumber: false });
 
   const [{ countryName, countryCode, phoneNumber, message }, dispatch] = useStateContext();
@@ -174,6 +174,6 @@ const BuilderForm = withRouter(({ history }) => {
       </CenterContent>
     </LinkBuilderFrom>
   )
-});
+};
 
 export default BuilderForm;

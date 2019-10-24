@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -12,11 +12,11 @@ const ErrorText = styled.div`
   margin-top: 8px;
 `;
 
-const ErrorMessage = ({ children, show }) => (
+const ErrorMessage = memo(({ children, show }) => (
   <Fade show={show}>
     <ErrorText>{children}</ErrorText>
   </Fade>
-);
+));
 
 ErrorMessage.propTypes = {
   children: PropTypes.node,

@@ -1,5 +1,5 @@
 /* Dependencies */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import styled from 'styled-components';
 import ClipboardJS from 'clipboard';
 
@@ -15,13 +15,13 @@ import { useStateContext } from '@states/context';
 import { removeExceptNumber, convertToUri } from '@utils/formats';
 
 /* Styled Components */
-const ResultContent = styled.div`
+const ResultContent = memo(styled.div`
   text-align: center;
-`;
+`);
 
-const PreviewTextarea = styled(Input)`
+const PreviewTextarea = memo(styled(Input)`
   text-align: center;
-`;
+`);
 
 /* Result */
 const Result = () => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -81,7 +81,7 @@ const ModalContent = styled.div`
   }
 `;
 
-const Modal = ({ title, closeFunc, children, show }) => (
+const Modal = memo(({ title, closeFunc, children, show }) => (
   <Fade show={show}>
     <ModalOverlay onClick={closeFunc}>
       <ModalBox onClick={event => event.stopPropagation()}>
@@ -93,7 +93,7 @@ const Modal = ({ title, closeFunc, children, show }) => (
       </ModalBox>
     </ModalOverlay>
   </Fade>
-);
+));
 
 Modal.propTypes = {
   title: PropTypes.string,

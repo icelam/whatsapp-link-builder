@@ -1,7 +1,7 @@
 /* dependencies */
 import React, { lazy, Suspense, Fragment } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
+import history from '@utils/history';
 import { ThemeProvider } from 'styled-components';
 
 /* States */
@@ -23,8 +23,6 @@ import routes from '@routes';
 const LinkBuilder = lazy(() => import(/* webpackChunkName: 'LinkBuilder' */ '@pages/LinkBuilder'));
 const LinkResult = lazy(() => import(/* webpackChunkName: 'LinkResult' */ '@pages/LinkResult'));
 const NotFound = lazy(() => import(/* webpackChunkName: 'NotFound' */ '@pages/NotFound'));
-
-const history = createBrowserHistory();
 
 // Execute when user navigates between routes
 const onRouteChange = (history) => {

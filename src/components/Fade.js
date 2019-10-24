@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Transition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 
-const Fade = ({ show, duration, children, className, mountOnEnter, unmountOnExit }) => {
+const Fade = memo(({ show, duration, children, className, mountOnEnter, unmountOnExit }) => {
   const defaultStyle = {
     transition: `opacity ${duration}ms ease-in-out`,
     opacity: 0
@@ -26,7 +26,7 @@ const Fade = ({ show, duration, children, className, mountOnEnter, unmountOnExit
       )}
     </Transition>
   )
-};
+});
 
 Fade.propTypes = {
   show: PropTypes.bool,
