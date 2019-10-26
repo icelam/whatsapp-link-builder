@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Input from '@components/Input';
 
 const InputSymbol = styled.div`
+  position: relative;
   &:after {
     content: '${props => props.symbol}';
     bottom: 10px;

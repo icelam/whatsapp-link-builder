@@ -10,15 +10,13 @@
 import { useState, useEffect } from 'react';
 
 /* Context */
-import { useStateContext } from '@states/context';
+// import { useStateContext } from '@states/context';
 
 /* Utils */
 import validator from '@utils/validator';
 
-export const useFormState = () => {
+export const useFormState = ({ countryCode, phoneNumber, message }) => {
   const [allowGenerate, setAllowGenerate] = useState(null);
-
-  const [{ countryCode, phoneNumber, message }] = useStateContext();
 
   useEffect(() => {
     let formDataValid = false;

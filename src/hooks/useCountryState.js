@@ -6,7 +6,6 @@
 import { useEffect } from 'react';
 
 /* Context */
-import { useStateContext } from '@states/context';
 import * as actions from '@states/actions';
 
 /* Service */
@@ -15,9 +14,9 @@ import services from '@services/service';
 /* Utils */
 import countryUtils from '@utils/countryUtils';
 
-export const useCountryState = () => {
+export const useCountryState = (dispatch, countryCode) => {
   // eslint-disable-next-line no-empty-pattern
-  const [{ countryCode }, dispatch] = useStateContext();
+  // const [{ countryCode }, dispatch] = useStateContext();
 
   // Dispatch actions
   const updateCountryInfo = (countryName, countryCode) => {
@@ -40,5 +39,5 @@ export const useCountryState = () => {
         updateCountryInfo(countryUtils.getCountryName(defaultCountryCode), defaultCountryCode);
       });
     }
-  },[]); // eslint-disable-line react-hooks/exhaustive-deps
+  },[countryCode]); // eslint-disable-line react-hooks/exhaustive-deps
 };
