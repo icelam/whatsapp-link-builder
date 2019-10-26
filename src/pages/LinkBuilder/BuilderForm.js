@@ -20,7 +20,7 @@ import { useCountryState } from '@hooks/useCountryState';
 import { useFormState } from '@hooks/useFormState';
 
 /* Context */
-import { useStateContext } from '@states/context';
+// import { useStateContext } from '@states/context';
 import * as actions from '@states/actions';
 
 /* Utils */
@@ -73,18 +73,15 @@ const CenterContent = styled.div`
 `;
 
 /* Form */
-const BuilderForm = withRouter(({ history }) => {
+const BuilderForm = ({ history, dispatch, data: {countryName, countryCode, phoneNumber, message}}) => {
   const [errorState, setErrorState] = useState({ countryCode: false, phoneNumber: false });
-
-  const [{ countryName, countryCode, phoneNumber, message }, dispatch] = useStateContext();
-
   // Custom Hook - Subscribe to auto counrty detection
-  useCountryState();
+  useCountryState(dispatch, countryCode);
 
   // Custom Hook - Check if form is ready to submit
-  const allowSubmit = useFormState();
+  const allowSubmit = useFormState({countryCode, phoneNumber, message});
 
-  // Phone Format Checking
+  // // Phone Format Checking
   useEffect(() => {
     setErrorState({
       // Error case for country code - Country code not empty and format wrong || Phone number not empty and country code empty
@@ -190,6 +187,20 @@ const BuilderForm = withRouter(({ history }) => {
       {buttonBox}
     </LinkBuilderFrom>
   )
-});
+};
 
-export default BuilderForm;
+// export default BuilderForm;
+
+export default React.memo(withRouter(BuilderForm), (prevProps, nextProps) => {
+  
+  if (
+    prevProps.data.countryCode === nextProps.data.countryCode &&
+    prevProps.data.countryName === nextProps.data.countryName &&
+    prevProps.data.message === nextProps.data.message &&
+    prevProps.data.phoneNumber === nextProps.data.phoneNumber) 
+  {
+    return true;
+  }
+
+  return false;
+});
