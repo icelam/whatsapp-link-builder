@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import '@fortawesome/fontawesome-free/css/all.css';
 
+import '@styles/font-face.css';
 import GlobalStyle from '@styles/global';
 import uiThemes from '@styles/themes';
 

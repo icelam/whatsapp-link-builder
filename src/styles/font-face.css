@@ -1,0 +1,6 @@
+/*
+ * Import fonts using static CSS file
+ * since styled-components createGlobalStyle's CSSOM APIs cannot handle it well
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');

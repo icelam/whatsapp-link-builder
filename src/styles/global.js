@@ -7,8 +7,6 @@ import { createGlobalStyle } from 'styled-components';
 
 /* base styles */
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-
   * {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
